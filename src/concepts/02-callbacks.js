@@ -10,14 +10,22 @@ export const callbacksComponent = ( element ) => {
     const id1 = `5d86371f1efebc31def272e2`;
     const id2 = `5d86371f2343e37870b91ef1`;
 
-    findHero( id, (error, hero) => {
+    findHero( id1, (error1, hero1) => {
 
-        if (error) {
-            element.innerHTML = error;
+        if (error1) {
+            element.innerHTML = error1;
             return;
         }
 
-        element.innerHTML = hero.name;
+        findHero( id2, ( error2, hero2) => {
+
+            if (error2) {
+                element.innerHTML = error2;
+            }
+
+            element.innerHTML = `${hero1} / ${hero2}`;
+        });
+        
     });
 
 }
