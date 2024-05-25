@@ -26,7 +26,26 @@ export const promiseComponent = ( element ) => {
     const id2 = '5d86371fd55e2e2a30fe1ccb';
 
     let hero1;
-    
+
+    //Con desestructuración
+    Promise.all([
+        findHero(id), 
+        findHero(id2)
+    ]).then(([hero1, hero2]) => {
+        rendertwoHeroes(hero1, hero2);
+    }).catch((error) => renderError(error));
+
+
+    //Sin desestructuración
+    // Promise.all([
+    //     findHero(id), 
+    //     findHero(id2)
+    // ]).then((HeroesCollect) => {
+    //     const hero1 = HeroesCollect[0];
+    //     const hero2 = HeroesCollect[1];
+    //     rendertwoHeroes(hero1, hero2);
+    // }).catch((error) => renderError(error));
+
     // Forma 2 Cadena de Promesas
     // findHero(id)
     //     .then( (hero) => {
@@ -46,8 +65,7 @@ export const promiseComponent = ( element ) => {
     //             .catch( heroeError => renderError( heroeError));
     //     })
     //     .catch(heroeError => renderError(heroeError))
-
-    // }
+}
 
 /**
  * 
