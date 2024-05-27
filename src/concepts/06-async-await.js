@@ -6,6 +6,10 @@ import { heroes } from "../data/heroes";
  */
 export const asyncAwaitComponent = async ( element ) => {
     
+    const renderError = (error) => {
+        element.innerHTML = error;
+    }
+
     const renderAsyncAwait = ( value1, value2 ) => {
         element.innerHTML = `${value1} / ${value2}`;
     }
@@ -16,11 +20,17 @@ export const asyncAwaitComponent = async ( element ) => {
     // const hero1 = await findHero( id1 );
     // const hero2 = await findHero( id2 );
 
-    const {name: name1} = await findHero( id1 );
-    const {name: name2} = await findHero( id2 );
-    
-    renderAsyncAwait(name1, name2);
-    // renderAsyncAwait(hero1.name, hero2.name);
+    try {
+        
+        const {name: name1} = await findHero( id1 );
+        const {name: name2} = await findHero( id2 );
+        
+        renderAsyncAwait(name1, name2);
+        // renderAsyncAwait(hero1.name, hero2.name);
+    } catch (error) {
+        renderError(error);
+    }
+
 
 }
 
