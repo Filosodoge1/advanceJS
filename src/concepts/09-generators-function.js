@@ -5,8 +5,26 @@
  */
 export const generatorFunctionComponent = ( element ) => {
     
-    console.log( 'demo component' );
+    let Idscounter = IdsGenerator();
 
+    const button = document.createElement('button');
+    button.innerText = 'Click me';
+    element.append(button);
+
+    const renderButton = () => {
+        const valorId = Idscounter.next();
+        button.innerText = `Click ${ valorId.value }`;
+    }
+
+    button.addEventListener('click', (event) => renderButton(event));
+
+}
+
+function* IdsGenerator() {
+    let counterId = 0;
+    while (true) {
+        yield ++counterId;
+    }
 }
 
 function* funcionGeneradora() {
